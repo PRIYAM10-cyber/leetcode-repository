@@ -1,0 +1,32 @@
+void delete_at_start(){
+        head = head.next;
+    }
+    void delete_at_end()
+    {
+        Node temp = head;
+        while (temp.next.next!=null)
+        {
+            temp = temp.next;
+        }
+        temp.next=null;
+    }
+    void delete_at_position(int position)
+    {
+        if(position==1)
+        {
+            head = head.next;
+        }
+        else if(position==cal_length())
+        {
+            delete_at_end();
+        }
+        else
+        {
+            Node temp = head;
+            while (temp.next!=null && position>2)
+            {
+                temp = temp.next;
+            }
+            temp.next = temp.next.next;
+        }
+    }
