@@ -1,0 +1,26 @@
+func validPath(n int, edges [][]int, source int, destination int) bool {
+	g := map[int][]int{}
+	for i := 0; i < len(edges); i++ {
+		g[edges[i][0]] = append(g[edges[i][0]], edges[i][1])
+		g[edges[i][1]] = append(g[edges[i][1]], edges[i][0])
+	}
+
+	queue := []int{source}
+	visited := map[int]bool{source: true}
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+		qLen := len(g[node])
+		for i := 0; i < qLen; i++ {
+			if visited[g[node][i]] {
+				continue
+			}
+			visited[g[node][i]] = true
+			queue = append(queue, g[node][i])
+		}
+		if visited[destination] {
+			return true
+		}
+	}
+	return visited[destination]
+}
